@@ -7,7 +7,8 @@ import initOpenCascade from "opencascade.js";
 import { useState, useEffect } from 'react'
 
 function App() {
-  const [ modelURL, setModelURL ] = useState("")
+  const [ modelURL, setModelURL ] = useState("nope")
+  const [ rebuilding, setRebuilding ] = useState(false)
   const [ bwidth, setBWidth ] = useState(50)
   const [ bheight, setBHeight ] = useState(70)
   const [ bthickness, setBThickness ] = useState(30)
@@ -33,8 +34,10 @@ function App() {
     // const mUrl = visualizeShapes(oc, cut.Shape());
     // setModelURL(mUrl)
 
+    setRebuilding(true)
     const bottleShape = makeBottle(oc, bwidth, bheight, bthickness)
     const mUrl = visualizeShapes(oc, bottleShape);
+    setRebuilding(false)
     setModelURL(mUrl)
 
   }, [oc, bwidth, bheight, bthickness])
@@ -55,7 +58,9 @@ function App() {
         Thickness
         <input type="range" min="15" max="50" step="1" value={bthickness} onChange={e => setBThickness(e.target.value)} className="slider" id="myRange"></input>
       </div>
-      <model-viewer style={{width:600, height:500}} src={modelURL} camera-controls enable-pan />
+      { modelURL === "nope" && <div style={{width:600, height:500, background:'#BBBBBB'}}>Please wait--loading OpenCascade wasm</div> }
+      { modelURL !== "nope" && <model-viewer style={{width:600, height:500}} src={modelURL} camera-controls enable-pan /> }
+      
     </div>
   );
 }
