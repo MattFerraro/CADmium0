@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/ocjstest/static/css/main.073c9b0a.css",
+    "main.js": "/ocjstest/static/js/main.03a4192f.js",
+    "static/js/787.1dceaac8.chunk.js": "/ocjstest/static/js/787.1dceaac8.chunk.js",
+    "static/media/opencascade.full.wasm": "/ocjstest/static/media/opencascade.full.da1e7571cd100a1fcdc0.wasm",
+    "index.html": "/ocjstest/index.html",
+    "main.073c9b0a.css.map": "/ocjstest/static/css/main.073c9b0a.css.map",
+    "main.03a4192f.js.map": "/ocjstest/static/js/main.03a4192f.js.map",
+    "787.1dceaac8.chunk.js.map": "/ocjstest/static/js/787.1dceaac8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.03a4192f.js"
+  ]
+}
