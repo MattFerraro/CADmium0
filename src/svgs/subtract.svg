@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="96"
+   height="96"
+   viewBox="0 0 25.399999 25.400001"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
+   sodipodi:docname="subtract.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="6.9856532"
+     inkscape:cx="39.724274"
+     inkscape:cy="40.654752"
+     inkscape:window-width="1312"
+     inkscape:window-height="812"
+     inkscape:window-x="54"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     units="px" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible;"
+       id="Arrow1Lend"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt;"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path1035" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#f9f9f9;stroke:#000000;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path123"
+       sodipodi:type="arc"
+       sodipodi:cx="16.972063"
+       sodipodi:cy="12.457864"
+       sodipodi:rx="6.5856552"
+       sodipodi:ry="6.5856552"
+       sodipodi:start="0"
+       sodipodi:end="6.2481391"
+       sodipodi:open="true"
+       sodipodi:arc-type="arc"
+       d="m 23.557718,12.457864 a 6.5856552,6.5856552 0 0 1 -6.527955,6.585402 6.5856552,6.5856552 0 0 1 -6.642344,-6.470007 6.5856552,6.5856552 0 0 1 6.411562,-6.6987756 6.5856552,6.5856552 0 0 1 6.754693,6.3526256" />
+    <path
+       style="fill:#b3b3b3;stroke:#000000;stroke-width:0.52916698;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.11666793,2.11666793;stroke-dashoffset:0;stroke-opacity:1"
+       id="path143"
+       sodipodi:type="arc"
+       sodipodi:cx="8.5650854"
+       sodipodi:cy="12.457865"
+       sodipodi:rx="6.5856552"
+       sodipodi:ry="6.5856552"
+       sodipodi:start="0"
+       sodipodi:end="6.2481391"
+       sodipodi:open="true"
+       sodipodi:arc-type="arc"
+       d="M 15.150741,12.457865 A 6.5856552,6.5856552 0 0 1 8.6227852,19.043267 6.5856552,6.5856552 0 0 1 1.9804413,12.57326 6.5856552,6.5856552 0 0 1 8.3920037,5.8744844 6.5856552,6.5856552 0 0 1 15.146697,12.22711" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 18.336321,10.952678 Z"
+       id="path1572" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.52916698;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:2.11666793,2.11666793;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 12.731514,7.3877823 -0.595261,0.5812845 c 0,0 -0.525038,0.5433653 -0.662961,0.7847298 -0.155163,0.2068839 -0.514134,0.947088 -0.514134,0.947088 l -0.324716,0.9606174 c 0,0 -0.212767,0.64527 -0.230007,1.041797 -0.03448,0.396527 0,0.933557 0,0.933557 l 0.135299,1.312394 0.257066,0.865908 c 0,0 0.267972,0.655315 0.405895,0.879439 0.206884,0.344806 0.581782,0.852379 0.581782,0.852379 l 0.541194,0.595312 0.392364,0.284127"
+       id="path2119"
+       sodipodi:nodetypes="ccccccccccccc" />
+  </g>
+</svg>

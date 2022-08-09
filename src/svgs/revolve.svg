@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="96"
+   height="96"
+   viewBox="0 0 25.399999 25.400001"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
+   sodipodi:docname="revolve.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="4.8147513"
+     inkscape:cx="28.765764"
+     inkscape:cy="63.554685"
+     inkscape:window-width="1312"
+     inkscape:window-height="812"
+     inkscape:window-x="92"
+     inkscape:window-y="54"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     units="px" />
+  <defs
+     id="defs2">
+    <marker
+       style="overflow:visible;"
+       id="Arrow1Lend"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="Arrow1Lend"
+       inkscape:isstock="true">
+      <path
+         transform="scale(0.8) rotate(180) translate(12.5,0)"
+         style="fill-rule:evenodd;fill:context-stroke;stroke:context-stroke;stroke-width:1.0pt;"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         id="path1035" />
+    </marker>
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#999999;stroke:#000000;stroke-width:0.529167;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 16.758134,10.224595 -0.786452,-0.7691009 -0.724835,-0.4111 -0.876292,-0.3137343 -1.2333,-0.054092 -0.973658,0.2271863 -0.811383,0.378645 -0.584195,0.486829 -0.540921,0.6382869 -0.4111002,0.659925 -0.2163683,0.768108 -0.1081844,0.8222 0.086548,0.962839 0.20555,0.714016 0.3786449,0.681561 0.562558,0.670742 0.735653,0.540921 0.984477,0.432737 0.919566,0.151458 0.876292,-0.07573 0.833019,-0.216369 0.703197,-0.378644 0.54725,-0.348599 3.076922,4.351415 -0.540921,0.400282 -0.876293,0.530102 -1.309029,0.55174 -1.611945,0.4111 L 13.364442,22.16714 11.871499,22.004865 10.594925,21.680312 9.6212663,21.301667 8.3987845,20.59847 7.5008553,19.960183 6.7219289,19.192075 5.9754578,18.315783 5.3155341,17.288033 4.8395235,16.292738 4.3959681,14.994527 4.1904181,13.782864 4.1255075,12.657748 4.1904181,11.575905 4.3743313,10.548154 4.7097023,9.4987681 5.1316209,8.5251098 5.6617236,7.5622701 6.2675552,6.74007 7.078937,5.8637777 7.8578634,5.203854 8.7341555,4.6196593 9.5671741,4.2193775 10.519195,3.8082774 l 1.514581,-0.3461895 1.287392,-0.129821 1.244119,0.086547 1.287392,0.2163686 1.02775,0.3137342 1.049387,0.4760105 0.984477,0.584195 0.854655,0.6274683 0.681561,0.6491055 0.50964,0.6384234 z"
+       id="path3179"
+       sodipodi:nodetypes="ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc" />
+    <ellipse
+       style="fill:#f9f9f9;stroke:#000000;stroke-width:0.529365;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path2636"
+       cx="8.6250286"
+       cy="18.666258"
+       rx="2.7092032"
+       ry="1.2741207"
+       transform="matrix(0.77950598,-0.62639478,0.65609001,0.75468265,0,0)" />
+    <ellipse
+       style="fill:#f9f9f9;stroke:#000000;stroke-width:0.529365;stroke-linecap:round;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none"
+       id="ellipse2844"
+       cx="25.28199"
+       cy="-3.3769948"
+       rx="2.7092032"
+       ry="1.2741207"
+       transform="matrix(0.6111476,0.79151665,-0.76727434,0.64131902,0,0)" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.52916673;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:2.11666692,2.11666692;stroke-dashoffset:0"
+       d="M 1.8134374,12.639109 H 21.541438"
+       id="path3679" />
+  </g>
+</svg>
