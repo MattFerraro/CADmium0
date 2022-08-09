@@ -169,3 +169,12 @@ export function makeBottle(oc, width, height, thickness) {
 
   return aRes.Moved(loc, false);
 }
+
+
+// Make a box with a sphere cut out of it
+// const box = new oc.BRepPrimAPI_MakeBox_2(1, 1, 1);
+// const sphere = new oc.BRepPrimAPI_MakeSphere_5(new oc.gp_Pnt_3(0.5, 0.5, 0.5), radius);
+// const cut = new oc.BRepAlgoAPI_Cut_3(box.Shape(), sphere.Shape(), new oc.Message_ProgressRange_1());
+// cut.Build(new oc.Message_ProgressRange_1());
+// const mUrl = visualizeShapes(oc, cut.Shape());
+// setModelURL(mUrl)
