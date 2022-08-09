@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="96" height="96" version="1.1" viewBox="0 0 25.4 25.4" xmlns="http://www.w3.org/2000/svg">
+ <g stroke="#000" stroke-width=".52917">
+  <g fill="#f9f9f9" stroke-linejoin="bevel">
+   <path d="m1.7814 1.6331 3.0743 3.395h2.4997l-2.1405-2.1405h14.495l1.7167 1.7167h2.4207l-2.9917-2.9917z"/>
+   <path d="m1.7814 1.6331v18.403l3.0367 2.6996 0.037633-17.707z"/>
+   <path d="m4.8557 5.0281-0.037633 17.707h19.003l0.026751-18.131h-2.4207v16.149l-14.212-0.033313 0.14022-15.692z"/>
+  </g>
+  <g fill="#b3b3b3">
+   <path d="m19.71 2.8876v16.181l1.7167 1.6854v-16.149l-1.7167-1.7167" stroke-linejoin="bevel"/>
+   <path d="m5.2149 2.8876h14.495v16.181h-12.49l0.13534-14.04z"/>
+   <path d="m19.71 19.068h-12.49l-0.00488 1.6521 14.212 0.03331z" stroke-linejoin="bevel"/>
+  </g>
+ </g>
+</svg>

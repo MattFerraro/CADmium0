@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="96" height="96" version="1.1" viewBox="0 0 25.4 25.4" xmlns="http://www.w3.org/2000/svg">
+ <g stroke="#000">
+  <rect x="1.8845" y="15.756" width="5.9152" height="5.9152" fill="#f9f9f9" stroke-linecap="square" stroke-width=".52917"/>
+  <rect x="13.244" y="3.769" width="10.888" height="10.888" fill="#999" stroke-linecap="square" stroke-width=".52917"/>
+  <path d="m4.2401 13.453c-0.07876-5.4978 2.6173-5.6534 7.0668-6.3863" fill="none" marker-end="" stroke-width=".26458"/>
+  <path d="m11.826 6.9554-4.7712-1.2191 1.5636 1.7825-0.57813 2.0975 3.7858-2.6608" stroke-linecap="round" stroke-width=".26458"/>
+ </g>
+</svg>

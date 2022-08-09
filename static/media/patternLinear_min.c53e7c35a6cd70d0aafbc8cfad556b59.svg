@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="96" height="96" version="1.1" viewBox="0 0 25.4 25.4" xmlns="http://www.w3.org/2000/svg">
+ <g stroke="#000" stroke-linejoin="bevel" stroke-width=".52917">
+  <g transform="translate(0,-1.5875)" fill="#f9f9f9">
+   <rect x="3.9514" y="5.3783" width="7.4089" height="7.4089" stroke-linecap="round"/>
+   <path d="m3.9514 5.3783-1.4543-1.4543h7.3672l1.496 1.4543z"/>
+   <path d="m2.4971 3.924 1.4543 1.4543v7.4089l-1.4402-1.5477-0.014102-7.3155"/>
+  </g>
+  <g fill="#b3b3b3">
+   <g transform="translate(11.63 -1.5875)">
+    <rect x="3.9514" y="5.3783" width="7.4089" height="7.4089" stroke-linecap="round"/>
+    <path d="m3.9514 5.3783-1.4543-1.4543h7.3672l1.496 1.4543z"/>
+    <path d="m2.4971 3.924 1.4543 1.4543v7.4089l-1.4402-1.5477-0.014102-7.3155"/>
+   </g>
+   <g transform="translate(0 10.293)">
+    <rect x="3.9514" y="5.3783" width="7.4089" height="7.4089" stroke-linecap="round"/>
+    <path d="m3.9514 5.3783-1.4543-1.4543h7.3672l1.496 1.4543z"/>
+    <path d="m2.4971 3.924 1.4543 1.4543v7.4089l-1.4402-1.5477-0.014102-7.3155"/>
+   </g>
+   <g transform="translate(11.429 10.293)">
+    <rect x="3.9514" y="5.3783" width="7.4089" height="7.4089" stroke-linecap="round"/>
+    <path d="m3.9514 5.3783-1.4543-1.4543h7.3672l1.496 1.4543z"/>
+    <path d="m2.4971 3.924 1.4543 1.4543v7.4089l-1.4402-1.5477-0.014102-7.3155"/>
+   </g>
+  </g>
+ </g>
+</svg>
