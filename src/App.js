@@ -222,21 +222,33 @@ function App() {
         </AppBar>
       </Box>
 
-      <div>
-        Width
-        <input type="range" min="20" max="100" step="1" value={bwidth} onChange={e => setBWidth(e.target.value)} className="slider" id="myRange"></input>
+      <div style={{width: '100vw', background: '#EEEEEE', display:'flex'}}>
+        <div style={{width: '20vw', background: '#FFFFFF', padding:'10px'}}>
+          <div>
+            Width
+            <input type="range" min="20" max="100" step="1" value={bwidth} onChange={e => setBWidth(e.target.value)} className="slider" id="myRange"></input>
+          </div>
+
+          <div>
+            Height
+            <input type="range" min="50" max="120" step="1" value={bheight} onChange={e => setBHeight(e.target.value)} className="slider" id="myRange"></input>
+          </div>
+      
+          <div>
+            Depth
+            <input type="range" min="15" max="50" step="1" value={bthickness} onChange={e => setBThickness(e.target.value)} className="slider" id="myRange"></input>
+          </div>
+        </div>
+        <div style={{width: '80vw', background: '#FFFFFF'}}>
+          { modelURL === "nope" && <div style={{width:600, height:500, background:'#BBBBBB'}}>Please wait--loading OpenCascade wasm</div> }
+          { modelURL !== "nope" && <model-viewer style={{width:'100%', height:500}} src={modelURL} camera-controls enable-pan /> }
+        </div>
       </div>
       
-      <div>
-        Height
-        <input type="range" min="50" max="120" step="1" value={bheight} onChange={e => setBHeight(e.target.value)} className="slider" id="myRange"></input>
-      </div>
-      <div>
-        Thickness
-        <input type="range" min="15" max="50" step="1" value={bthickness} onChange={e => setBThickness(e.target.value)} className="slider" id="myRange"></input>
-      </div>
-      { modelURL === "nope" && <div style={{width:600, height:500, background:'#BBBBBB'}}>Please wait--loading OpenCascade wasm</div> }
-      { modelURL !== "nope" && <model-viewer style={{width:600, height:500}} src={modelURL} camera-controls enable-pan /> }
+      
+      
+      
+      
       
     </div>
   );
