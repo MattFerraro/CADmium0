@@ -1,12 +1,11 @@
-import Box from '@mui/material/Box';
-import { useEffect } from 'react';
+import Box from "@mui/material/Box"
+import { useEffect } from "react"
 
-import { initScene } from './viewport-utils'
+import { initScene } from "./viewport-utils"
 
 function MainViewport() {
   useEffect(() => {
     initScene("main-viewport-canvas")
-    
   }, [])
 
   // TODO: Figure out how to do the right thing on window resize!
@@ -18,12 +17,18 @@ function MainViewport() {
   return (
     <div className="main-viewport-container">
       <Box sx={{ flexGrow: 1 }}>
-        <div id="main-viewport" style={{width:'100%', height:'600px', background: 'white'}}>
-          <canvas id="main-viewport-canvas" style={{width:'100%', height:'100%'}}></canvas>
+        <div
+          id="main-viewport"
+          style={{ width: "100%", height: "600px", background: "white" }}
+        >
+          <canvas
+            id="main-viewport-canvas"
+            style={{ width: "100%", height: "100%" }}
+          ></canvas>
         </div>
       </Box>
     </div>
-  );
+  )
 }
 
-export default MainViewport;
+export default MainViewport
