@@ -19,7 +19,7 @@ function MainViewport() {
     <div className="main-viewport-container">
       <Box sx={{ flexGrow: 1 }}>
         <div id="main-viewport" style={{width:'100%', height:'600px', background: 'white'}}>
-          <canvas id="main-viewport-canvas" style={{width:'100%', height:'100%', border: '1px solid red'}}></canvas>
+          <canvas id="main-viewport-canvas" style={{width:'100%', height:'100%'}}></canvas>
         </div>
       </Box>
     </div>
