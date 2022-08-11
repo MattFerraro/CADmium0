@@ -10,21 +10,20 @@ const jonquil = 0xf7cb15
 const white = 0xffffff
 
 export const planeMaterial = new THREE.MeshPhongMaterial({
-  color: 0xCCCCFF,
+  color: 0xccccff,
   side: THREE.DoubleSide,
   depthWrite: false,
   transparent: true,
-  opacity: .1,
+  opacity: 0.1,
 })
 
 export const planeSelectedMaterial = new THREE.MeshPhongMaterial({
-  color: 0xFFFFCC,
+  color: 0xffffcc,
   side: THREE.DoubleSide,
   depthWrite: false,
   transparent: true,
-  opacity: .3,
+  opacity: 0.3,
 })
-
 
 export function initScene(canvasID, doc) {
   const canvas = document.getElementById(canvasID)
@@ -103,17 +102,14 @@ export function initScene(canvasID, doc) {
   const rightLine = new THREE.Line(rightLineGeometry, lineMaterial)
   scene.add(rightLine)
 
-
-
   // ADD LIGHTS
-  scene.add(new THREE.AmbientLight(0xFFFFFF))
+  scene.add(new THREE.AmbientLight(0xffffff))
 
   // SET UP CAMERA
   const cscale = 8
   camera.position.y = 1 * cscale
   camera.position.x = 2.7 * cscale
   camera.position.z = 0.7 * cscale
-
 
   // ADD CONTROLS
   const controls = new OrbitControls(camera, renderer.domElement)

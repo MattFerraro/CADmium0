@@ -51,12 +51,11 @@ function App() {
     console.log("action:", activeAction)
   }, [activeAction])
 
-
   const renderPrompt = () => {
     switch (activeAction) {
-      case 'new-sketch':
+      case "new-sketch":
         return <SketchPrompt></SketchPrompt>
-      case '':
+      case "":
         return <div>No prompt</div>
     }
   }
@@ -70,7 +69,6 @@ function App() {
         <div style={{ width: "20vw", background: "#FFFFFF", padding: "10px" }}>
           <DocTree doc={doc}></DocTree>
           {renderPrompt()}
-
         </div>
         <div style={{ width: "80vw", background: "#FFFFFF" }}>
           {oc === "nope" && (
@@ -78,7 +76,9 @@ function App() {
               Please wait--loading OpenCascade wasm
             </div>
           )}
-          {oc !== "nope" && <MainViewport doc={doc} activeAction={activeAction}></MainViewport>}
+          {oc !== "nope" && (
+            <MainViewport doc={doc} activeAction={activeAction}></MainViewport>
+          )}
         </div>
       </div>
     </div>

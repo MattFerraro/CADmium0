@@ -24,14 +24,17 @@ import { useState } from "react"
 const actionIconWidth = 35
 
 function AppBarTop({ setActiveAction }) {
-
-
   return (
     <div className="ActionBar">
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" color="grey" elevation={0}>
           <Toolbar variant="dense">
-            <IconButton size="small" color="inherit" aria-label="sketch" onClick={() => setActiveAction("new-sketch")}>
+            <IconButton
+              size="small"
+              color="inherit"
+              aria-label="sketch"
+              onClick={() => setActiveAction("new-sketch")}
+            >
               <img
                 src={sketch}
                 alt="sketch"

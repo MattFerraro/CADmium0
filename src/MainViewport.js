@@ -1,12 +1,16 @@
 import Box from "@mui/material/Box"
 import { useEffect, useRef } from "react"
 
-import { initScene, planeSelectedMaterial, planeMaterial } from "./viewportUtils"
+import {
+  initScene,
+  planeSelectedMaterial,
+  planeMaterial,
+} from "./viewportUtils"
 
 import { Raycaster, Vector2 } from "three"
 
 function MainViewport({ doc, activeAction }) {
-  const raycaster = new Raycaster();
+  const raycaster = new Raycaster()
   const canvasRef = useRef()
   const renderPackage = useRef()
   useEffect(() => {
@@ -15,10 +19,12 @@ function MainViewport({ doc, activeAction }) {
     // HANDLE ANIMATION
     function animate() {
       requestAnimationFrame(animate)
-      renderPackage.current.renderer.render(renderPackage.current.scene, renderPackage.current.camera)
+      renderPackage.current.renderer.render(
+        renderPackage.current.scene,
+        renderPackage.current.camera
+      )
     }
     animate()
-
   }, [])
 
   // TODO: Figure out how to do the right thing on window resize!
@@ -32,26 +38,30 @@ function MainViewport({ doc, activeAction }) {
     }
 
     if (activeAction === "new-sketch") {
-      const pointer = new Vector2();
-      var rect = canvasRef.current.getBoundingClientRect();
+      const pointer = new Vector2()
+      var rect = canvasRef.current.getBoundingClientRect()
       const x = event.clientX - rect.left
       const y = event.clientY - rect.top
 
+      pointer.x = (x / canvasRef.current.width) * 2 - 1
+      pointer.y = -(y / canvasRef.current.height) * 2 + 1
 
-      pointer.x = (x / canvasRef.current.width) * 2 - 1;
-      pointer.y = - (y / canvasRef.current.height) * 2 + 1;
-
-      raycaster.setFromCamera(pointer, renderPackage.current.camera);
-      const intersects = raycaster.intersectObjects(renderPackage.current.scene.children).filter((obj) => obj.object.isMesh)
+      raycaster.setFromCamera(pointer, renderPackage.current.camera)
+      const intersects = raycaster
+        .intersectObjects(renderPackage.current.scene.children)
+        .filter((obj) => obj.object.isMesh)
 
       for (let i = 0; i < doc.default.planes.length; i++) {
-        if (intersects[0] && intersects[0].object && intersects[0].object == doc.default.planes[i].object) {
+        if (
+          intersects[0] &&
+          intersects[0].object &&
+          intersects[0].object == doc.default.planes[i].object
+        ) {
           doc.default.planes[i].object.material = planeSelectedMaterial
         } else {
           doc.default.planes[i].object.material = planeMaterial
         }
       }
-
     }
   }
 
