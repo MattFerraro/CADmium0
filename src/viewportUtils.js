@@ -9,13 +9,30 @@ const redSalsa = 0xff595e
 const jonquil = 0xf7cb15
 const white = 0xffffff
 
-export function initScene(canvasID) {
+export const planeMaterial = new THREE.MeshPhongMaterial({
+  color: 0xCCCCFF,
+  side: THREE.DoubleSide,
+  depthWrite: false,
+  transparent: true,
+  opacity: .1,
+})
+
+export const planeSelectedMaterial = new THREE.MeshPhongMaterial({
+  color: 0xFFFFCC,
+  side: THREE.DoubleSide,
+  depthWrite: false,
+  transparent: true,
+  opacity: .3,
+})
+
+
+export function initScene(canvasID, doc) {
   const canvas = document.getElementById(canvasID)
   const scene = new THREE.Scene()
 
   const w = canvas.getBoundingClientRect().width
   const h = canvas.getBoundingClientRect().height
-  const camera = new THREE.PerspectiveCamera(50, w / h, 0.1, 1000)
+  const camera = new THREE.PerspectiveCamera(5, w / h, 0.01, 1000)
 
   const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true })
   renderer.setClearColor(0xffffff, 0)
@@ -24,27 +41,28 @@ export function initScene(canvasID) {
   // xy is top
   // xz is front
   // yz is right
-  const planeMaterial = new THREE.MeshPhongMaterial({
-    color: 0xdddddd,
-    side: THREE.DoubleSide,
-    depthWrite: false,
-    transparent: true,
-    opacity: 0.03,
-  })
 
   const topPlaneGeometry = new THREE.PlaneGeometry(1, 1)
   const topPlane = new THREE.Mesh(topPlaneGeometry, planeMaterial)
   scene.add(topPlane)
+  topPlane.mousedOver = false
+  doc.default.planes[0].object = topPlane
 
   const frontPlaneGeometry = new THREE.PlaneGeometry(1, 1)
   frontPlaneGeometry.rotateX(PI / 2)
   const frontPlane = new THREE.Mesh(frontPlaneGeometry, planeMaterial)
   scene.add(frontPlane)
+  frontPlane.mousedOver = false
+  doc.default.planes[1].object = frontPlane
 
   const rightPlaneGeometry = new THREE.PlaneGeometry(1, 1)
   rightPlaneGeometry.rotateY(PI / 2)
   const rightPlane = new THREE.Mesh(rightPlaneGeometry, planeMaterial)
   scene.add(rightPlane)
+  rightPlane.mousedOver = false
+  doc.default.planes[2].object = rightPlane
+
+  // const planes = [topPlane, frontPlane, rightPlane]
 
   const dotGeometry = new THREE.BufferGeometry()
   dotGeometry.setAttribute(
@@ -85,17 +103,20 @@ export function initScene(canvasID) {
   const rightLine = new THREE.Line(rightLineGeometry, lineMaterial)
   scene.add(rightLine)
 
-  camera.position.y = -1
-  camera.position.x = 0.7
-  camera.position.z = 0.7
+
+
+  // ADD LIGHTS
+  scene.add(new THREE.AmbientLight(0xFFFFFF))
+
+  // SET UP CAMERA
+  const cscale = 8
+  camera.position.y = 1 * cscale
+  camera.position.x = 2.7 * cscale
+  camera.position.z = 0.7 * cscale
+
+
+  // ADD CONTROLS
   const controls = new OrbitControls(camera, renderer.domElement)
-
-  function animate() {
-    requestAnimationFrame(animate)
-    renderer.render(scene, camera)
-  }
-
-  animate()
 
   renderer.render(scene, camera)
   return { renderer, camera, scene }
