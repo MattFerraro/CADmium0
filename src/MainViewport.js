@@ -44,15 +44,18 @@ function MainViewport({ doc, activeAction, setSelection, selection }) {
   }, [activeAction])
 
   // Any time selection changes, the whole MainViewport gets re-rendered
-  doc.default.planes.forEach((plane) => {
-    if (plane.object) {
-      if (plane == selection[0]) {
-        plane.object.material = planeSelectedMaterial
-      } else {
-        plane.object.material = planeMaterial
+  if (doc.default) {
+    doc.default.planes.forEach((plane) => {
+      if (plane.object) {
+        if (plane == selection[0]) {
+          plane.object.material = planeSelectedMaterial
+        } else {
+          plane.object.material = planeMaterial
+        }
       }
-    }
-  })
+    })
+  }
+
 
   // TODO: Figure out how to do the right thing on window resize!
   // const onSizeChange = () => {
@@ -66,6 +69,10 @@ function MainViewport({ doc, activeAction, setSelection, selection }) {
 
     if (activeAction === "new-sketch") {
       const intersects = findIntersectingMeshes(event)
+
+      if (!doc.default) {
+        return
+      }
       for (let i = 0; i < doc.default.planes.length; i++) {
         if (
           intersects[0] &&

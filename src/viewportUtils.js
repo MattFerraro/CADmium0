@@ -56,21 +56,21 @@ export function initScene(canvasID, doc) {
   const topPlane = new THREE.Mesh(topPlaneGeometry, planeMaterial)
   scene.add(topPlane)
   topPlane.mousedOver = false
-  doc.default.planes[0].object = topPlane
+  // doc.default.planes[0].object = topPlane
 
   const frontPlaneGeometry = new THREE.PlaneGeometry(1, 1)
   frontPlaneGeometry.rotateX(PI / 2)
   const frontPlane = new THREE.Mesh(frontPlaneGeometry, planeMaterial)
   scene.add(frontPlane)
   frontPlane.mousedOver = false
-  doc.default.planes[1].object = frontPlane
+  // doc.default.planes[1].object = frontPlane
 
   const rightPlaneGeometry = new THREE.PlaneGeometry(1, 1)
   rightPlaneGeometry.rotateY(PI / 2)
   const rightPlane = new THREE.Mesh(rightPlaneGeometry, planeMaterial)
   scene.add(rightPlane)
   rightPlane.mousedOver = false
-  doc.default.planes[2].object = rightPlane
+  // doc.default.planes[2].object = rightPlane
 
   // const planes = [topPlane, frontPlane, rightPlane]
 

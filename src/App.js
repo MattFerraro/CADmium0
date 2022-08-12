@@ -1,8 +1,9 @@
 import "./App.css"
 
 import "@google/model-viewer"
-// import { visualizeShapes, makeBottle } from "./visualize.js"
 import initOpenCascade from "opencascade.js"
+// import opencascade from './customBuild/customBuild.examples.js';
+// import opencascadeWasm from './customBuild/customBuild.examples.wasm';
 
 import { useState, useEffect } from "react"
 
@@ -19,34 +20,36 @@ import DocTree from "./DocTree"
 import { initDoc } from "./docUtils"
 import SketchPrompt from "./SketchPrompt"
 
+
 function App() {
-  const [oc, setOC] = useState("nope")
-  const [doc, setDoc] = useState(initDoc())
+  const [oc, setOC] = useState()
+  const [doc, setDoc] = useState({})
   const [activeAction, setActiveAction] = useState("")
   const [selection, setSelection] = useState([])
+  console.log("app render")
 
   useEffect(() => {
     console.log("Starting to import openCascade wasm...")
-    initOpenCascade().then((newOC) => {
+    const startTime = new Date();
+    initOpenCascade({
+    }).then((newOC) => {
       console.log("wasm is initialized!")
+      const endTime = new Date();
+      const delta = endTime - startTime
+      console.log(delta)
       setOC(newOC)
+    }).catch(err => {
+      console.log(err)
     })
-    setOC("not null!")
   }, [setOC])
 
-  // useEffect(() => {
-  //   if (oc == null) {
-  //     return
-  //   }
-  //   const bottleShape = makeBottle(oc, bwidth, bheight, bthickness)
-  //   const mUrl = visualizeShapes(oc, bottleShape)
-
-  //   setModelURL(mUrl)
-  // }, [oc, bwidth, bheight, bthickness])
 
   useEffect(() => {
-    // console.log("action:", activeAction)
-  }, [activeAction])
+    if (!!oc) {
+      console.log("new oc", typeof oc)
+      setDoc(initDoc(oc))
+    }
+  }, [oc])
 
   const renderPrompt = () => {
     switch (activeAction) {
@@ -77,19 +80,19 @@ function App() {
           {renderPrompt()}
         </div>
         <div style={{ width: "80vw", background: "#FFFFFF" }}>
-          {oc === "nope" && (
+          {!oc && (
             <div style={{ width: "100%", height: 600, background: "#BBBBBB" }}>
               Please wait--loading OpenCascade wasm
             </div>
           )}
-          {oc !== "nope" && (
+          {/* {!!oc && (
             <MainViewport
               doc={doc}
               activeAction={activeAction}
               selection={selection}
               setSelection={setSelection}
             ></MainViewport>
-          )}
+          )} */}
         </div>
       </div>
     </div>

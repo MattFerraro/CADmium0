@@ -278,3 +278,14 @@ export function makeBottle(oc, width, height, thickness) {
 // cut.Build(new oc.Message_ProgressRange_1());
 // const mUrl = visualizeShapes(oc, cut.Shape());
 // setModelURL(mUrl)
+
+
+// useEffect(() => {
+//   if (oc == null) {
+//     return
+//   }
+//   const bottleShape = makeBottle(oc, bwidth, bheight, bthickness)
+//   const mUrl = visualizeShapes(oc, bottleShape)
+
+//   setModelURL(mUrl)
+// }, [oc, bwidth, bheight, bthickness])
