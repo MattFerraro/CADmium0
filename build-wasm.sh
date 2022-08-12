@@ -1,0 +1,1 @@
+docker run --rm -it -v "$(pwd):/src" -u "$(id -u):$(id -g)" donalffons/opencascade.js custom-build.yml

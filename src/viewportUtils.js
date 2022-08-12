@@ -1,24 +1,35 @@
+import { colorScheme } from "./colorScheme"
 import * as THREE from "three"
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
+import CameraControls from "camera-controls"
+
+CameraControls.install({ THREE: THREE })
 
 const PI = 3.1415926
 
 const bluetiful = 0x0366fc
-const verdigris = 0x48a9a6
-const redSalsa = 0xff595e
-const jonquil = 0xf7cb15
-const white = 0xffffff
+// const verdigris = 0x48a9a6
+// const redSalsa = 0xff595e
+// const jonquil = 0xf7cb15
+// const white = 0xffffff
 
 export const planeMaterial = new THREE.MeshPhongMaterial({
-  color: 0xccccff,
+  color: colorScheme.plane,
   side: THREE.DoubleSide,
   depthWrite: false,
   transparent: true,
   opacity: 0.1,
 })
 
+export const planeHoverMaterial = new THREE.MeshPhongMaterial({
+  color: colorScheme.mouseOver,
+  side: THREE.DoubleSide,
+  depthWrite: false,
+  transparent: true,
+  opacity: 0.3,
+})
+
 export const planeSelectedMaterial = new THREE.MeshPhongMaterial({
-  color: 0xffffcc,
+  color: colorScheme.selected,
   side: THREE.DoubleSide,
   depthWrite: false,
   transparent: true,
@@ -112,8 +123,10 @@ export function initScene(canvasID, doc) {
   camera.position.z = 0.7 * cscale
 
   // ADD CONTROLS
-  const controls = new OrbitControls(camera, renderer.domElement)
+  // const controls = new OrbitControls(camera, renderer.domElement)
+  const clock = new THREE.Clock()
+  const cameraControls = new CameraControls(camera, renderer.domElement)
 
   renderer.render(scene, camera)
-  return { renderer, camera, scene }
+  return { renderer, camera, scene, cameraControls, clock }
 }

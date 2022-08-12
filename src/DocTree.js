@@ -4,7 +4,7 @@ const iconWidth = 25
 
 function DocTree({ doc }) {
   return (
-    <div style={{ border: "1px solid black", width: "100%" }}>
+    <div style={{ borderBottom: "1px solid black", width: "100%" }}>
       {doc.default.planes.map((plane, idx) => {
         return (
           <div style={{ display: "flex" }} key={idx}>

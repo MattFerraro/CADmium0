@@ -23,7 +23,7 @@ import { useState } from "react"
 
 const actionIconWidth = 35
 
-function AppBarTop({ setActiveAction }) {
+function AppBarTop({ setActiveAction, setSelection }) {
   return (
     <div className="ActionBar">
       <Box sx={{ flexGrow: 1 }}>
@@ -33,7 +33,10 @@ function AppBarTop({ setActiveAction }) {
               size="small"
               color="inherit"
               aria-label="sketch"
-              onClick={() => setActiveAction("new-sketch")}
+              onClick={() => {
+                setActiveAction("new-sketch")
+                setSelection([])
+              }}
             >
               <img
                 src={sketch}
