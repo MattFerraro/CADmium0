@@ -15,7 +15,7 @@ This is currently an experiment to see what can be done quickly. Do not use this
 ## Milestone 1: Bare minimum functionality
 
 - ~~Demonstrate OpenCascade working efficiently in the browswer via wasm bindings~~
-- Replace the 3D model viewer with Three.js so I have complete control
+- ~~Replace the 3D model viewer with Three.js so I have complete control~~
 - Allow the user to make a sketch with no constraints
 - Allow a user to extrude stuff from their sketch
 - Revolve, sweep, loft, fillet, chamfer, draft, shell, hole, linear pattern, radial pattern, mirror body, transform ops (scale, rotate, move), boolean ops (intersect, union, subtract)

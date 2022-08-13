@@ -36,7 +36,7 @@ export const planeSelectedMaterial = new THREE.MeshPhongMaterial({
   opacity: 0.3,
 })
 
-export function initScene(canvasID, doc) {
+export function initScene(canvasID) {
   const canvas = document.getElementById(canvasID)
   const scene = new THREE.Scene()
 
@@ -52,28 +52,6 @@ export function initScene(canvasID, doc) {
   // xz is front
   // yz is right
 
-  const topPlaneGeometry = new THREE.PlaneGeometry(1, 1)
-  const topPlane = new THREE.Mesh(topPlaneGeometry, planeMaterial)
-  scene.add(topPlane)
-  topPlane.mousedOver = false
-  // doc.default.planes[0].object = topPlane
-
-  const frontPlaneGeometry = new THREE.PlaneGeometry(1, 1)
-  frontPlaneGeometry.rotateX(PI / 2)
-  const frontPlane = new THREE.Mesh(frontPlaneGeometry, planeMaterial)
-  scene.add(frontPlane)
-  frontPlane.mousedOver = false
-  // doc.default.planes[1].object = frontPlane
-
-  const rightPlaneGeometry = new THREE.PlaneGeometry(1, 1)
-  rightPlaneGeometry.rotateY(PI / 2)
-  const rightPlane = new THREE.Mesh(rightPlaneGeometry, planeMaterial)
-  scene.add(rightPlane)
-  rightPlane.mousedOver = false
-  // doc.default.planes[2].object = rightPlane
-
-  // const planes = [topPlane, frontPlane, rightPlane]
-
   const dotGeometry = new THREE.BufferGeometry()
   dotGeometry.setAttribute(
     "position",
@@ -86,32 +64,6 @@ export function initScene(canvasID, doc) {
   })
   const dot = new THREE.Points(dotGeometry, dotMaterial)
   scene.add(dot)
-
-  const lineMaterial = new THREE.LineBasicMaterial({
-    color: bluetiful,
-    linewidth: 1,
-  })
-  const points = []
-  points.push(new THREE.Vector3(-0.5, -0.5, 0))
-  points.push(new THREE.Vector3(-0.5, 0.5, 0))
-  points.push(new THREE.Vector3(0.5, 0.5, 0))
-  points.push(new THREE.Vector3(0.5, -0.5, 0))
-  points.push(new THREE.Vector3(-0.5, -0.5, 0))
-  const lineGeometry = new THREE.BufferGeometry().setFromPoints(points)
-
-  const topLineGeometry = lineGeometry.clone()
-  const topLine = new THREE.Line(topLineGeometry, lineMaterial)
-  scene.add(topLine)
-
-  const frontLineGeometry = lineGeometry.clone()
-  frontLineGeometry.rotateX(PI / 2)
-  const frontLine = new THREE.Line(frontLineGeometry, lineMaterial)
-  scene.add(frontLine)
-
-  const rightLineGeometry = lineGeometry.clone()
-  rightLineGeometry.rotateY(PI / 2)
-  const rightLine = new THREE.Line(rightLineGeometry, lineMaterial)
-  scene.add(rightLine)
 
   // ADD LIGHTS
   scene.add(new THREE.AmbientLight(0xffffff))
@@ -129,4 +81,41 @@ export function initScene(canvasID, doc) {
 
   renderer.render(scene, camera)
   return { renderer, camera, scene, cameraControls, clock }
+}
+
+export function addPlaneToScene(plane, scene) {
+  // given a plane, add it to the scene and add a backref to the plane
+  // so the plane knows its object
+  const planeGeometry = new THREE.PlaneGeometry(1, 1)
+  const planeMesh = new THREE.Mesh(planeGeometry, planeMaterial)
+  const normalVector = new THREE.Vector3(...plane.normal)
+  planeMesh.lookAt(normalVector)
+  scene.add(planeMesh)
+  plane.mesh = planeMesh
+
+
+  const lineMaterial = new THREE.LineBasicMaterial({
+    color: bluetiful,
+    linewidth: 1,
+  })
+  const points = []
+  points.push(new THREE.Vector3(-0.5, -0.5, 0))
+  points.push(new THREE.Vector3(-0.5, 0.5, 0))
+  points.push(new THREE.Vector3(0.5, 0.5, 0))
+  points.push(new THREE.Vector3(0.5, -0.5, 0))
+  points.push(new THREE.Vector3(-0.5, -0.5, 0))
+  const lineGeometry = new THREE.BufferGeometry().setFromPoints(points)
+  const lineMesh = new THREE.Line(lineGeometry, lineMaterial)
+  lineMesh.lookAt(normalVector)
+  scene.add(lineMesh)
+
+  // const frontLineGeometry = lineGeometry.clone()
+  // frontLineGeometry.rotateX(PI / 2)
+  // const frontLine = new THREE.Line(frontLineGeometry, lineMaterial)
+  // scene.add(frontLine)
+
+  // const rightLineGeometry = lineGeometry.clone()
+  // rightLineGeometry.rotateY(PI / 2)
+  // const rightLine = new THREE.Line(rightLineGeometry, lineMaterial)
+  // scene.add(rightLine)
 }

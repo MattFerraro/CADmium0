@@ -6,6 +6,8 @@ import {
   planeSelectedMaterial,
   planeHoverMaterial,
   planeMaterial,
+  addPlane,
+  addPlaneToScene,
 } from "./viewportUtils"
 
 import { Raycaster, Vector2 } from "three"
@@ -15,7 +17,7 @@ function MainViewport({ doc, activeAction, setSelection, selection }) {
   const canvasRef = useRef()
   const renderPackage = useRef()
   useEffect(() => {
-    renderPackage.current = initScene("main-viewport-canvas", doc)
+    renderPackage.current = initScene("main-viewport-canvas")
 
     // HANDLE ANIMATION
     function animate() {
@@ -33,7 +35,7 @@ function MainViewport({ doc, activeAction, setSelection, selection }) {
       )
     }
     animate()
-  }, [doc])
+  }, [])
 
 
   useEffect(() => {
@@ -55,6 +57,14 @@ function MainViewport({ doc, activeAction, setSelection, selection }) {
       }
     })
   }
+
+  useEffect(() => {
+    if (!doc || !doc.default) { return }
+
+    addPlaneToScene(doc.default.planes[0], renderPackage.current.scene)
+    addPlaneToScene(doc.default.planes[1], renderPackage.current.scene)
+    addPlaneToScene(doc.default.planes[2], renderPackage.current.scene)
+  }, [doc])
 
 
   // TODO: Figure out how to do the right thing on window resize!

@@ -85,14 +85,14 @@ function App() {
               Please wait--loading OpenCascade wasm
             </div>
           )}
-          {/* {!!oc && (
+          {!!oc && (
             <MainViewport
               doc={doc}
               activeAction={activeAction}
               selection={selection}
               setSelection={setSelection}
             ></MainViewport>
-          )} */}
+          )}
         </div>
       </div>
     </div>
