@@ -69,17 +69,23 @@ export function initScene(canvasID) {
   scene.add(new THREE.AmbientLight(0xffffff))
 
   // SET UP CAMERA
-  const cscale = 8
+  const cscale = 12
   camera.position.y = 1 * cscale
-  camera.position.x = 2.7 * cscale
-  camera.position.z = 0.7 * cscale
+  camera.position.x = .8 * cscale
+  camera.position.z = .25 * cscale
+  camera.up.set(0, 0, 1)
 
   // ADD CONTROLS
   // const controls = new OrbitControls(camera, renderer.domElement)
   const clock = new THREE.Clock()
   const cameraControls = new CameraControls(camera, renderer.domElement)
 
+
+  const axesHelper = new THREE.AxesHelper(5); scene.add(axesHelper);
+  scene.add(axesHelper)
+
   renderer.render(scene, camera)
+
   return { renderer, camera, scene, cameraControls, clock }
 }
 
@@ -88,6 +94,7 @@ export function addPlaneToScene(plane, scene) {
   // so the plane knows its object
   const planeGeometry = new THREE.PlaneGeometry(1, 1)
   const planeMesh = new THREE.Mesh(planeGeometry, planeMaterial)
+  planeMesh.position.set(...plane.origin)
   const normalVector = new THREE.Vector3(...plane.normal)
   planeMesh.lookAt(normalVector)
   scene.add(planeMesh)
@@ -106,6 +113,7 @@ export function addPlaneToScene(plane, scene) {
   points.push(new THREE.Vector3(-0.5, -0.5, 0))
   const lineGeometry = new THREE.BufferGeometry().setFromPoints(points)
   const lineMesh = new THREE.Line(lineGeometry, lineMaterial)
+  lineMesh.position.set(...plane.origin)
   lineMesh.lookAt(normalVector)
   scene.add(lineMesh)
 
