@@ -7,19 +7,19 @@ export const historySlice = createSlice({
             {
                 "type": "newPlane",
                 "origin": [0, 0, 0],
-                "axis": [0, 0, 1],
+                "normal": [0, 0, 1],
                 "name": "top"
             },
             {
                 "type": "newPlane",
                 "origin": [0, 0, 0],
-                "axis": [1, 0, 0],
+                "normal": [1, 0, 0],
                 "name": "front"
             },
             {
                 "type": "newPlane",
                 "origin": [0, 0, 0],
-                "axis": [0, 1, 0],
+                "normal": [0, 1, 0],
                 "name": "right"
             },
         ],

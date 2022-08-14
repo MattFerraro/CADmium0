@@ -52,22 +52,6 @@ export function initScene(canvasID) {
   // xz is front
   // yz is right
 
-  const dotGeometry = new THREE.BufferGeometry()
-  dotGeometry.setAttribute(
-    "position",
-    new THREE.BufferAttribute(new Float32Array([0, 0, 0]), 3)
-  )
-  const dotMaterial = new THREE.PointsMaterial({
-    size: 5,
-    color: bluetiful,
-    sizeAttenuation: false,
-  })
-  const dot = new THREE.Points(dotGeometry, dotMaterial)
-  scene.add(dot)
-
-  // ADD LIGHTS
-  scene.add(new THREE.AmbientLight(0xffffff))
-
   // SET UP CAMERA
   const cscale = 12
   camera.position.y = 1 * cscale
@@ -84,13 +68,17 @@ export function initScene(canvasID) {
   cameraControls.mouseButtons.wheel = CameraControls.ACTION["DOLLY"]
   cameraControls.mouseButtons.right = CameraControls.ACTION["ROTATE"]
 
-
-  const axesHelper = new THREE.AxesHelper(5); scene.add(axesHelper);
-  scene.add(axesHelper)
-
   renderer.render(scene, camera)
 
   return { renderer, camera, scene, cameraControls, clock }
+}
+
+export function addLightsToScene(scene) {
+  scene.add(new THREE.AmbientLight(0xffffff))
+
+  // Sneak in a little axes helper for now
+  const axesHelper = new THREE.AxesHelper(5)
+  scene.add(axesHelper)
 }
 
 export function addPlaneToScene(plane, scene) {
@@ -144,4 +132,19 @@ export function addPlaneToScene(plane, scene) {
   // rightLineGeometry.rotateY(PI / 2)
   // const rightLine = new THREE.Line(rightLineGeometry, lineMaterial)
   // scene.add(rightLine)
+}
+
+export function addPointToScene(scene) {
+  const dotGeometry = new THREE.BufferGeometry()
+  dotGeometry.setAttribute(
+    "position",
+    new THREE.BufferAttribute(new Float32Array([0, 0, 0]), 3)
+  )
+  const dotMaterial = new THREE.PointsMaterial({
+    size: 5,
+    color: bluetiful,
+    sizeAttenuation: false,
+  })
+  const dot = new THREE.Points(dotGeometry, dotMaterial)
+  scene.add(dot)
 }

@@ -21,13 +21,22 @@ import { initDoc } from "./docUtils"
 import SketchPrompt from "./SketchPrompt"
 
 import { History } from './features/history/History';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectHistory,
+} from './features/history/historySlice';
+import { makePlane } from "./occtUtils";
 
 function App() {
   const [oc, setOC] = useState()
   const [doc, setDoc] = useState({})
   const [activeAction, setActiveAction] = useState("")
   const [selection, setSelection] = useState([])
+
   console.log("app render")
+
+  const history = useSelector(selectHistory);
+  const [occtState, setOcctState] = useState({ planes: [], points: [] })
 
   useEffect(() => {
     console.log("Starting to import openCascade wasm...")
@@ -44,13 +53,21 @@ function App() {
     })
   }, [setOC])
 
-
   useEffect(() => {
-    if (!!oc) {
-      console.log("new oc", typeof oc)
-      setDoc(initDoc(oc))
+    if (!oc) { return }
+    const newState = {
+      planes: [],
+      points: [],
     }
-  }, [oc])
+    for (let i = 0; i < history.length; i++) {
+      const action = history[i]
+      if (action.type === "newPlane") {
+        const newPlane = makePlane(oc, action)
+        newState.planes.push(newPlane)
+      }
+    }
+    setOcctState(newState)
+  }, [oc, history])
 
   const renderPrompt = () => {
     switch (activeAction) {
@@ -89,7 +106,7 @@ function App() {
           )}
           {!!oc && (
             <MainViewport
-              doc={doc}
+              occtState={occtState}
               activeAction={activeAction}
               selection={selection}
               setSelection={setSelection}

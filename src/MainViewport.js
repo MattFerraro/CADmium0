@@ -1,25 +1,25 @@
 import Box from "@mui/material/Box"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
+
+import { Scene } from "three"
 
 import {
   initScene,
   addPlaneToScene,
+  addLightsToScene,
 } from "./viewportUtils"
-
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  selectHistory,
-} from './features/history/historySlice';
 
 import { Raycaster, Vector2 } from "three"
 
-function MainViewport({ doc, activeAction, setSelection, selection }) {
-  const history = useSelector(selectHistory);
+function MainViewport({ occtState, activeAction }) {
   const raycaster = new Raycaster()
   const canvasRef = useRef()
   const renderPackage = useRef()
+
+
   useEffect(() => {
     renderPackage.current = initScene("main-viewport-canvas")
+    addLightsToScene(renderPackage.current.scene)
 
     // HANDLE ANIMATION
     function animate() {
@@ -41,106 +41,57 @@ function MainViewport({ doc, activeAction, setSelection, selection }) {
   }, [])
 
   useEffect(() => {
-    console.log("History has changed from main viewport!")
-  }, [history])
-
-
-  useEffect(() => {
     if (activeAction === "sketch") {
       console.log("entering sketch mode!")
       renderPackage.current.cameraControls.setLookAt(0, 0, 5, 0, 0, 0, true)
     }
   }, [activeAction])
 
-  // Any time selection changes, the whole MainViewport gets re-rendered
-  if (doc.default) {
-    // doc.default.planes.forEach((plane) => {
-    //   if (plane.object) {
-    //     if (plane == selection[0]) {
-    //       plane.object.material = planeSelectedMaterial
-    //     } else {
-    //       plane.object.material = planeMaterial
-    //     }
-    //   }
-    // })
-  }
 
   useEffect(() => {
-    if (!doc || !doc.default) { return }
+    if (!occtState) { return }
 
-    addPlaneToScene(doc.default.planes[0], renderPackage.current.scene)
-    addPlaneToScene(doc.default.planes[1], renderPackage.current.scene)
-    addPlaneToScene(doc.default.planes[2], renderPackage.current.scene)
-  }, [doc])
+    const scene2 = new Scene()
+    addLightsToScene(scene2)
 
+    for (let plane of occtState.planes) {
+      addPlaneToScene(plane, scene2)
+    }
 
-  // TODO: Figure out how to do the right thing on window resize!
-  // const onSizeChange = () => {
-  //   console.log("size changed!")
+    // renderPackage.current.scene.dispose()
+    renderPackage.current.scene = scene2
+
+    renderPackage.current.renderer.render(
+      scene2,
+      renderPackage.current.camera
+    )
+
+  }, [occtState])
+
+  // const onMouseClick = (event) => {
+  //   if (activeAction === "") {
+  //     return
+  //   }
+
+  //   if (activeAction === "new-sketch") {
+  //     const intersects = findIntersectingMeshes(event)
+
+  //     if (intersects.length == 0) {
+  //       // the user clicked in empty space and wants to deselect everything
+  //       for (let plane of doc.default.planes) {
+  //         plane.setSelected(false)
+  //       }
+  //     } else {
+  //       for (let p of doc.default.planes) {
+  //         if (p == intersects[0].object.docRef) {
+  //           p.setSelected(true)
+  //         } else {
+  //           p.setSelected(false)
+  //         }
+  //       }
+  //     }
+  //   }
   // }
-  // window.addEventListener('resize', onSizeChange)
-  const onMouseMove = (event) => {
-    if (activeAction === "") {
-      return
-    }
-
-    if (activeAction === "new-sketch") {
-      const intersects = findIntersectingMeshes(event)
-      console.log(intersects)
-
-      if (!doc.default) {
-        return
-      }
-      // for (let i = 0; i < doc.default.planes.length; i++) {
-      //   if (
-      //     intersects[0] &&
-      //     intersects[0].object &&
-      //     intersects[0].object == doc.default.planes[i].object
-      //   ) {
-      //     if (selection.length && selection[0] == doc.default.planes[i]) {
-      //       doc.default.planes[i].object.material = planeSelectedMaterial
-      //     } else {
-      //       doc.default.planes[i].object.material = planeHoverMaterial
-      //     }
-      //   } else {
-      //     if (selection.length && selection[0] == doc.default.planes[i]) {
-      //       doc.default.planes[i].object.material = planeSelectedMaterial
-      //     } else {
-      //       doc.default.planes[i].object.material = planeMaterial
-      //     }
-      //   }
-      // }
-    }
-  }
-
-  const onMouseClick = (event) => {
-    if (activeAction === "") {
-      return
-    }
-
-    if (activeAction === "new-sketch") {
-      const intersects = findIntersectingMeshes(event)
-
-      if (intersects.length == 0) {
-        // the user clicked in empty space and wants to deselect everything
-        for (let plane of doc.default.planes) {
-          plane.setSelected(false)
-        }
-      } else {
-        // for (let inter of intersects) {
-        //   inter.object.docRef.setSelected(true)
-        //   break
-        // }
-        for (let p of doc.default.planes) {
-          if (p == intersects[0].object.docRef) {
-            p.setSelected(true)
-          } else {
-            p.setSelected(false)
-          }
-        }
-      }
-    }
-  }
 
   const findIntersectingMeshes = (event) => {
     var rect = canvasRef.current.getBoundingClientRect()
@@ -169,8 +120,8 @@ function MainViewport({ doc, activeAction, setSelection, selection }) {
             ref={canvasRef}
             id="main-viewport-canvas"
             style={{ width: "100%", height: "100%" }}
-            // onMouseMove={(e) => onMouseMove(e)}
-            onMouseDown={(e) => onMouseClick(e)}
+          // onMouseMove={(e) => onMouseMove(e)}
+          //onMouseDown={(e) => onMouseClick(e)}
           ></canvas>
         </div>
       </Box>
