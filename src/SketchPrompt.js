@@ -10,6 +10,8 @@ function SketchPrompt({ activeAction, setActiveAction, selection }) {
 
   const createSketch = () => {
     console.log("creating sketch")
+
+
     setActiveAction("sketch")
   }
 

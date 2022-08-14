@@ -3,10 +3,6 @@ import { useEffect, useRef } from "react"
 
 import {
   initScene,
-  planeSelectedMaterial,
-  planeHoverMaterial,
-  planeMaterial,
-  addPlane,
   addPlaneToScene,
 } from "./viewportUtils"
 
@@ -28,11 +24,12 @@ function MainViewport({ doc, activeAction, setSelection, selection }) {
 
       requestAnimationFrame(animate)
 
-      // if (activeAction === "new-sketch" || hasControlsUpdated) {
-      renderPackage.current.renderer.render(
-        renderPackage.current.scene,
-        renderPackage.current.camera
-      )
+      if (hasControlsUpdated) {
+        renderPackage.current.renderer.render(
+          renderPackage.current.scene,
+          renderPackage.current.camera
+        )
+      }
     }
     animate()
   }, [])
@@ -47,15 +44,15 @@ function MainViewport({ doc, activeAction, setSelection, selection }) {
 
   // Any time selection changes, the whole MainViewport gets re-rendered
   if (doc.default) {
-    doc.default.planes.forEach((plane) => {
-      if (plane.object) {
-        if (plane == selection[0]) {
-          plane.object.material = planeSelectedMaterial
-        } else {
-          plane.object.material = planeMaterial
-        }
-      }
-    })
+    // doc.default.planes.forEach((plane) => {
+    //   if (plane.object) {
+    //     if (plane == selection[0]) {
+    //       plane.object.material = planeSelectedMaterial
+    //     } else {
+    //       plane.object.material = planeMaterial
+    //     }
+    //   }
+    // })
   }
 
   useEffect(() => {
@@ -79,29 +76,30 @@ function MainViewport({ doc, activeAction, setSelection, selection }) {
 
     if (activeAction === "new-sketch") {
       const intersects = findIntersectingMeshes(event)
+      console.log(intersects)
 
       if (!doc.default) {
         return
       }
-      for (let i = 0; i < doc.default.planes.length; i++) {
-        if (
-          intersects[0] &&
-          intersects[0].object &&
-          intersects[0].object == doc.default.planes[i].object
-        ) {
-          if (selection.length && selection[0] == doc.default.planes[i]) {
-            doc.default.planes[i].object.material = planeSelectedMaterial
-          } else {
-            doc.default.planes[i].object.material = planeHoverMaterial
-          }
-        } else {
-          if (selection.length && selection[0] == doc.default.planes[i]) {
-            doc.default.planes[i].object.material = planeSelectedMaterial
-          } else {
-            doc.default.planes[i].object.material = planeMaterial
-          }
-        }
-      }
+      // for (let i = 0; i < doc.default.planes.length; i++) {
+      //   if (
+      //     intersects[0] &&
+      //     intersects[0].object &&
+      //     intersects[0].object == doc.default.planes[i].object
+      //   ) {
+      //     if (selection.length && selection[0] == doc.default.planes[i]) {
+      //       doc.default.planes[i].object.material = planeSelectedMaterial
+      //     } else {
+      //       doc.default.planes[i].object.material = planeHoverMaterial
+      //     }
+      //   } else {
+      //     if (selection.length && selection[0] == doc.default.planes[i]) {
+      //       doc.default.planes[i].object.material = planeSelectedMaterial
+      //     } else {
+      //       doc.default.planes[i].object.material = planeMaterial
+      //     }
+      //   }
+      // }
     }
   }
 
@@ -113,13 +111,22 @@ function MainViewport({ doc, activeAction, setSelection, selection }) {
     if (activeAction === "new-sketch") {
       const intersects = findIntersectingMeshes(event)
 
-      for (let i = 0; i < doc.default.planes.length; i++) {
-        if (
-          intersects[0] &&
-          intersects[0].object &&
-          intersects[0].object == doc.default.planes[i].object
-        ) {
-          setSelection([doc.default.planes[i]])
+      if (intersects.length == 0) {
+        // the user clicked in empty space and wants to deselect everything
+        for (let plane of doc.default.planes) {
+          plane.setSelected(false)
+        }
+      } else {
+        // for (let inter of intersects) {
+        //   inter.object.docRef.setSelected(true)
+        //   break
+        // }
+        for (let p of doc.default.planes) {
+          if (p == intersects[0].object.docRef) {
+            p.setSelected(true)
+          } else {
+            p.setSelected(false)
+          }
         }
       }
     }
@@ -152,7 +159,7 @@ function MainViewport({ doc, activeAction, setSelection, selection }) {
             ref={canvasRef}
             id="main-viewport-canvas"
             style={{ width: "100%", height: "100%" }}
-            onMouseMove={(e) => onMouseMove(e)}
+            // onMouseMove={(e) => onMouseMove(e)}
             onMouseDown={(e) => onMouseClick(e)}
           ></canvas>
         </div>

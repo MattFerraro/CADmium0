@@ -19,7 +19,9 @@ import DocTree from "./DocTree"
 
 import { initDoc } from "./docUtils"
 import SketchPrompt from "./SketchPrompt"
+import HistoryBar from "./HistoryBar"
 
+import { Counter } from './features/counter/Counter';
 
 function App() {
   const [oc, setOC] = useState()
@@ -75,9 +77,11 @@ function App() {
       ></ActionBar>
 
       <div style={{ width: "100vw", background: "#EEEEEE", display: "flex" }}>
-        <div style={{ width: "20vw", background: "#FFFFFF", padding: "10px" }}>
+        <div style={{ width: "20vw", background: "#AAFFFF", padding: "10px", display: "flex", flexDirection: "column" }}>
           <DocTree doc={doc}></DocTree>
           {renderPrompt()}
+          <Counter />
+          <HistoryBar doc={doc}></HistoryBar>
         </div>
         <div style={{ width: "80vw", background: "#FFFFFF" }}>
           {!oc && (

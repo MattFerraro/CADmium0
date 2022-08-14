@@ -71,7 +71,7 @@ export function initScene(canvasID) {
   // SET UP CAMERA
   const cscale = 12
   camera.position.y = 1 * cscale
-  camera.position.x = .8 * cscale
+  camera.position.x = .6 * cscale
   camera.position.z = .25 * cscale
   camera.up.set(0, 0, 1)
 
@@ -79,6 +79,10 @@ export function initScene(canvasID) {
   // const controls = new OrbitControls(camera, renderer.domElement)
   const clock = new THREE.Clock()
   const cameraControls = new CameraControls(camera, renderer.domElement)
+  cameraControls.mouseButtons.left = CameraControls.ACTION["NONE"]
+  cameraControls.mouseButtons.middle = CameraControls.ACTION["DOLLY"]
+  cameraControls.mouseButtons.wheel = CameraControls.ACTION["DOLLY"]
+  cameraControls.mouseButtons.right = CameraControls.ACTION["ROTATE"]
 
 
   const axesHelper = new THREE.AxesHelper(5); scene.add(axesHelper);
@@ -99,7 +103,7 @@ export function addPlaneToScene(plane, scene) {
   planeMesh.lookAt(normalVector)
   scene.add(planeMesh)
   plane.mesh = planeMesh
-
+  planeMesh.docRef = plane
 
   const lineMaterial = new THREE.LineBasicMaterial({
     color: bluetiful,
@@ -116,6 +120,20 @@ export function addPlaneToScene(plane, scene) {
   lineMesh.position.set(...plane.origin)
   lineMesh.lookAt(normalVector)
   scene.add(lineMesh)
+  plane.line = lineMesh
+  lineMesh.docRef = plane
+
+  const setSelected = (selected) => {
+    console.log("plane is now selected:", selected)
+    if (selected) {
+      planeMesh.material = planeSelectedMaterial
+    } else {
+      planeMesh.material = planeMaterial
+    }
+  }
+
+  plane.alpha = "betagamma"
+  plane.setSelected = setSelected
 
   // const frontLineGeometry = lineGeometry.clone()
   // frontLineGeometry.rotateX(PI / 2)

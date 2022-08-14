@@ -19,6 +19,8 @@ export function initDoc(oc) {
   const originPoint = makePoint(oc, "origin", [0, 0, 0])
   doc.default.points = [originPoint]
 
+  doc.history = ["A", "B", "C"]
+
   return doc
 }
 
@@ -34,6 +36,7 @@ export function makePlane(oc, name, origin, normal, xAxis) {
   const plane = {
     name, origin, oc_origin, normal, oc_normal, xAxis, oc_xAxis, oc_plane
   }
+
   return plane
 }
 
