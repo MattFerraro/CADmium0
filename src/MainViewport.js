@@ -6,9 +6,15 @@ import {
   addPlaneToScene,
 } from "./viewportUtils"
 
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectHistory,
+} from './features/history/historySlice';
+
 import { Raycaster, Vector2 } from "three"
 
 function MainViewport({ doc, activeAction, setSelection, selection }) {
+  const history = useSelector(selectHistory);
   const raycaster = new Raycaster()
   const canvasRef = useRef()
   const renderPackage = useRef()
@@ -33,6 +39,10 @@ function MainViewport({ doc, activeAction, setSelection, selection }) {
     }
     animate()
   }, [])
+
+  useEffect(() => {
+    console.log("History has changed from main viewport!")
+  }, [history])
 
 
   useEffect(() => {
