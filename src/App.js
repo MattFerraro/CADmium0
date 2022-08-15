@@ -88,7 +88,8 @@ function App() {
             oc,
             extrusion,
             relevantSketch,
-            relevantPlane
+            relevantPlane,
+            action.height
           )
           newState.solids.push(newSolid)
         }
