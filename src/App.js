@@ -20,12 +20,10 @@ import DocTree from "./DocTree"
 import { initDoc } from "./docUtils"
 import SketchPrompt from "./SketchPrompt"
 
-import { History } from './features/history/History';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  selectHistory,
-} from './features/history/historySlice';
-import { makePlane } from "./occtUtils";
+import { History } from "./features/history/History"
+import { useSelector, useDispatch } from "react-redux"
+import { selectHistory } from "./features/history/historySlice"
+import { makeExtrusion, makePlane, makeSketch } from "./occtUtils"
 
 function App() {
   const [oc, setOC] = useState()
@@ -33,37 +31,67 @@ function App() {
   const [activeAction, setActiveAction] = useState("")
   const [selection, setSelection] = useState([])
 
-  console.log("app render")
-
-  const history = useSelector(selectHistory);
-  const [occtState, setOcctState] = useState({ planes: [], points: [] })
+  const history = useSelector(selectHistory)
+  const [occtState, setOcctState] = useState({
+    planes: [],
+    points: [],
+    sketches: [],
+  })
 
   useEffect(() => {
     console.log("Starting to import openCascade wasm...")
-    const startTime = new Date();
-    initOpenCascade({
-    }).then((newOC) => {
-      console.log("wasm is initialized!")
-      const endTime = new Date();
-      const delta = endTime - startTime
-      console.log(delta)
-      setOC(newOC)
-    }).catch(err => {
-      console.log(err)
-    })
+    const startTime = new Date()
+    initOpenCascade({})
+      .then((newOC) => {
+        console.log("wasm is initialized!")
+        const endTime = new Date()
+        const delta = endTime - startTime
+        console.log(delta)
+        setOC(newOC)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }, [setOC])
 
   useEffect(() => {
-    if (!oc) { return }
+    if (!oc) {
+      return
+    }
     const newState = {
       planes: [],
       points: [],
+      sketches: [],
+      solids: [],
     }
+
+    const planesMap = {}
+    const sketchesMap = {}
     for (let i = 0; i < history.length; i++) {
       const action = history[i]
       if (action.type === "newPlane") {
         const newPlane = makePlane(oc, action)
         newState.planes.push(newPlane)
+        planesMap[newPlane.name] = newPlane
+      }
+      if (action.type === "newSketch") {
+        const relevantPlane = planesMap[action.plane]
+        const newSketch = makeSketch(oc, action, relevantPlane)
+        newState.sketches.push(newSketch)
+        sketchesMap[newSketch.name] = newSketch
+      }
+      if (action.type === "extrude") {
+        for (let extrusion of action.polygons) {
+          const relevantSketch = sketchesMap[extrusion.sketch]
+          const relevantPlane = planesMap[relevantSketch.plane]
+          const newSolid = makeExtrusion(
+            oc,
+            extrusion,
+            relevantSketch,
+            relevantPlane
+          )
+          newState.solids.push(newSolid)
+        }
       }
     }
     setOcctState(newState)
@@ -93,7 +121,16 @@ function App() {
       ></ActionBar>
 
       <div style={{ width: "100vw", background: "#EEEEEE", display: "flex" }}>
-        <div style={{ width: "20vw", background: "#AAFFFF", padding: "10px", display: "flex", flexDirection: "column" }}>
+        <div
+          style={{
+            width: "20vw",
+            background: "#FFFFFF",
+            border: "1px solid black",
+            padding: "10px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           {/* <DocTree doc={doc}></DocTree> */}
           {renderPrompt()}
           <History />

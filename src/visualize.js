@@ -279,7 +279,6 @@ export function makeBottle(oc, width, height, thickness) {
 // const mUrl = visualizeShapes(oc, cut.Shape());
 // setModelURL(mUrl)
 
-
 // useEffect(() => {
 //   if (oc == null) {
 //     return

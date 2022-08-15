@@ -7,6 +7,7 @@ import {
   initScene,
   addPlaneToScene,
   addLightsToScene,
+  addSketchToScene,
 } from "./viewportUtils"
 
 import { Raycaster, Vector2 } from "three"
@@ -15,7 +16,6 @@ function MainViewport({ occtState, activeAction }) {
   const raycaster = new Raycaster()
   const canvasRef = useRef()
   const renderPackage = useRef()
-
 
   useEffect(() => {
     renderPackage.current = initScene("main-viewport-canvas")
@@ -47,9 +47,10 @@ function MainViewport({ occtState, activeAction }) {
     }
   }, [activeAction])
 
-
   useEffect(() => {
-    if (!occtState) { return }
+    if (!occtState) {
+      return
+    }
 
     const scene2 = new Scene()
     addLightsToScene(scene2)
@@ -58,14 +59,14 @@ function MainViewport({ occtState, activeAction }) {
       addPlaneToScene(plane, scene2)
     }
 
+    for (let sketch of occtState.sketches) {
+      addSketchToScene(sketch, scene2)
+    }
+
     // renderPackage.current.scene.dispose()
     renderPackage.current.scene = scene2
 
-    renderPackage.current.renderer.render(
-      scene2,
-      renderPackage.current.camera
-    )
-
+    renderPackage.current.renderer.render(scene2, renderPackage.current.camera)
   }, [occtState])
 
   // const onMouseClick = (event) => {
@@ -120,8 +121,8 @@ function MainViewport({ occtState, activeAction }) {
             ref={canvasRef}
             id="main-viewport-canvas"
             style={{ width: "100%", height: "100%" }}
-          // onMouseMove={(e) => onMouseMove(e)}
-          //onMouseDown={(e) => onMouseClick(e)}
+            // onMouseMove={(e) => onMouseMove(e)}
+            //onMouseDown={(e) => onMouseClick(e)}
           ></canvas>
         </div>
       </Box>

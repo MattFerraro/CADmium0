@@ -55,8 +55,8 @@ export function initScene(canvasID) {
   // SET UP CAMERA
   const cscale = 12
   camera.position.y = 1 * cscale
-  camera.position.x = .6 * cscale
-  camera.position.z = .25 * cscale
+  camera.position.x = 0.6 * cscale
+  camera.position.z = 0.25 * cscale
   camera.up.set(0, 0, 1)
 
   // ADD CONTROLS
@@ -79,6 +79,43 @@ export function addLightsToScene(scene) {
   // Sneak in a little axes helper for now
   const axesHelper = new THREE.AxesHelper(5)
   scene.add(axesHelper)
+}
+
+export function addSketchToScene(sketch, scene) {
+  const sketchGroup = new THREE.Group()
+  for (let pt of sketch.oc_points) {
+    const ptGeometry = new THREE.BufferGeometry()
+    ptGeometry.setAttribute(
+      "position",
+      new THREE.BufferAttribute(new Float32Array([pt.X(), pt.Y(), pt.Z()]), 3)
+    )
+    const dotMaterial = new THREE.PointsMaterial({
+      size: 4,
+      color: 0x000000,
+      sizeAttenuation: false,
+    })
+    sketchGroup.add(new THREE.Points(ptGeometry, dotMaterial))
+  }
+
+  for (let segment of sketch.oc_segments) {
+    const oc_start = segment.StartPoint()
+    const oc_end = segment.EndPoint()
+
+    const lineMaterial = new THREE.LineBasicMaterial({
+      color: 0xfaa000,
+      linewidth: 1,
+    })
+    const points = []
+    points.push(new THREE.Vector3(oc_start.X(), oc_start.Y(), oc_start.Z()))
+    points.push(new THREE.Vector3(oc_end.X(), oc_end.Y(), oc_end.Z()))
+    const lineGeometry = new THREE.BufferGeometry().setFromPoints(points)
+    const lineMesh = new THREE.Line(lineGeometry, lineMaterial)
+    sketchGroup.add(lineMesh)
+  }
+
+  // TODO Add drawing polygons/faces?
+
+  scene.add(sketchGroup)
 }
 
 export function addPlaneToScene(plane, scene) {
@@ -119,19 +156,6 @@ export function addPlaneToScene(plane, scene) {
       planeMesh.material = planeMaterial
     }
   }
-
-  plane.alpha = "betagamma"
-  plane.setSelected = setSelected
-
-  // const frontLineGeometry = lineGeometry.clone()
-  // frontLineGeometry.rotateX(PI / 2)
-  // const frontLine = new THREE.Line(frontLineGeometry, lineMaterial)
-  // scene.add(frontLine)
-
-  // const rightLineGeometry = lineGeometry.clone()
-  // rightLineGeometry.rotateY(PI / 2)
-  // const rightLine = new THREE.Line(rightLineGeometry, lineMaterial)
-  // scene.add(rightLine)
 }
 
 export function addPointToScene(scene) {

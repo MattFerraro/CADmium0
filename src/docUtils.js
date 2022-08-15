@@ -2,7 +2,7 @@ export function initDoc(oc) {
   const doc = {
     default: {
       points: [],
-      planes: []
+      planes: [],
     },
   }
 
@@ -34,7 +34,14 @@ export function makePlane(oc, name, origin, normal, xAxis) {
   const oc_plane = new oc.gp_Pln_3(oc_origin, oc_normal_dir)
 
   const plane = {
-    name, origin, oc_origin, normal, oc_normal, xAxis, oc_xAxis, oc_plane
+    name,
+    origin,
+    oc_origin,
+    normal,
+    oc_normal,
+    xAxis,
+    oc_xAxis,
+    oc_plane,
   }
 
   return plane
