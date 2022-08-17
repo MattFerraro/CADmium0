@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ocjstest/static/css/main.835ce912.css",
-    "main.js": "/ocjstest/static/js/main.d807495f.js",
+    "main.js": "/ocjstest/static/js/main.1be99a5f.js",
     "static/js/787.1dceaac8.chunk.js": "/ocjstest/static/js/787.1dceaac8.chunk.js",
     "static/media/opencascade.full.wasm": "/ocjstest/static/media/opencascade.full.da1e7571cd100a1fcdc0.wasm",
     "static/media/roboto-all-500-normal.woff": "/ocjstest/static/media/roboto-all-500-normal.0ab669b7a0d19b178f57.woff",
@@ -54,11 +54,11 @@
     "static/media/sketch_min.svg": "/ocjstest/static/media/sketch_min.0078c21dc9e98b29eb435ab44bd0f229.svg",
     "static/media/plane_min.svg": "/ocjstest/static/media/plane_min.1515b07d80cdd2062c45e0412d7a2429.svg",
     "main.835ce912.css.map": "/ocjstest/static/css/main.835ce912.css.map",
-    "main.d807495f.js.map": "/ocjstest/static/js/main.d807495f.js.map",
+    "main.1be99a5f.js.map": "/ocjstest/static/js/main.1be99a5f.js.map",
     "787.1dceaac8.chunk.js.map": "/ocjstest/static/js/787.1dceaac8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.835ce912.css",
-    "static/js/main.d807495f.js"
+    "static/js/main.1be99a5f.js"
   ]
 }
