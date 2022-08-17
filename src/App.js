@@ -36,6 +36,7 @@ function App() {
     planes: [],
     points: [],
     sketches: [],
+    solids: [],
   })
 
   useEffect(() => {
@@ -95,6 +96,48 @@ function App() {
         }
       }
     }
+
+    // collect and mesh each body
+    for (let s of newState.solids) {
+      new oc.BRepMesh_IncrementalMesh_2(s.shape, 0.1, false, 0.1, false)
+      const explorer = new oc.TopExp_Explorer_2(
+        s.shape,
+        oc.TopAbs_ShapeEnum.TopAbs_FACE,
+        oc.TopAbs_ShapeEnum.TopAbs_SHAPE
+      )
+
+      // for this body, let's walk each face
+      s.faces = []
+      while (explorer.More()) {
+        const newFace = {}
+        const aFace = oc.TopoDS.Face_1(explorer.Current())
+        const loc = new oc.TopLoc_Location_1()
+        const purpose = oc.Poly_MeshPurpose_Active
+        const triangulationHandle = new oc.BRep_Tool.Triangulation(aFace, loc, purpose)
+
+        newFace.nodes = []
+        newFace.triangles = [] // note that the values placed here are +1 higher than they need to be
+        newFace.normals = []
+        // for this face, let's walk each node and triangle
+        if (!triangulationHandle.IsNull()) {
+          const triangulation = triangulationHandle.get()
+          for (let i = 1; i < triangulation.NbNodes() + 1; i++) {
+            const node = triangulation.Node(i)
+            newFace.nodes.push([node.X(), node.Y(), node.Z()])
+          }
+          for (let i = 1; i < triangulation.NbTriangles() + 1; i++) {
+            const triangle = triangulation.Triangle(i)
+            newFace.triangles.push([triangle.Value(1), triangle.Value(2), triangle.Value(3)])
+          }
+
+          console.log("do we even have normals?", triangulation.HasNormals())
+        }
+
+        s.faces.push(newFace)
+        explorer.Next()
+      }
+    }
+
     setOcctState(newState)
   }, [oc, history])
 

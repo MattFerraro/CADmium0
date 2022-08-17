@@ -8,6 +8,7 @@ import {
   addPlaneToScene,
   addLightsToScene,
   addSketchToScene,
+  addSolidToScene,
 } from "./viewportUtils"
 
 import { Raycaster, Vector2 } from "three"
@@ -61,6 +62,10 @@ function MainViewport({ occtState, activeAction }) {
 
     for (let sketch of occtState.sketches) {
       addSketchToScene(sketch, scene2)
+    }
+
+    for (let solid of occtState.solids) {
+      addSolidToScene(solid, scene2)
     }
 
     // renderPackage.current.scene.dispose()
@@ -121,8 +126,8 @@ function MainViewport({ occtState, activeAction }) {
             ref={canvasRef}
             id="main-viewport-canvas"
             style={{ width: "100%", height: "100%" }}
-            // onMouseMove={(e) => onMouseMove(e)}
-            //onMouseDown={(e) => onMouseClick(e)}
+          // onMouseMove={(e) => onMouseMove(e)}
+          //onMouseDown={(e) => onMouseClick(e)}
           ></canvas>
         </div>
       </Box>

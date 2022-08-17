@@ -1,9 +1,20 @@
 export function makeExtrusion(oc, extrusion, sketch, plane, height) {
+    // this makes one single extrusion of a face by a height
     const solid = {}
 
-    console.log("making extrusion", height, extrusion, sketch)
     const oc_face = sketch.oc_faces[extrusion['polygon']]
-    console.log("face:", oc_face)
+
+    const prismVec = new oc.gp_Vec_4(
+        plane.oc_normal.X() * height,
+        plane.oc_normal.Y() * height,
+        plane.oc_normal.Z() * height)
+    let body = new oc.BRepPrimAPI_MakePrism_1(
+        oc_face,
+        prismVec,
+        true,
+        true
+    ).Shape()
+    solid.shape = body
 
     return solid
 }
@@ -73,6 +84,7 @@ export function makeSketch(oc, action, plane) {
             const oc_pt = oc_pointsMap[pt]
             makePolygon.Add_1(oc_pt)
         }
+        makePolygon.Close()
         const wire = makePolygon.Wire()
         const f = new oc.BRepBuilderAPI_MakeFace_15(wire, false).Shape()
         sketch.oc_faces[polygon.id] = f

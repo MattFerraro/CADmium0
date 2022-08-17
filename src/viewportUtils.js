@@ -1,6 +1,7 @@
 import { colorScheme } from "./colorScheme"
 import * as THREE from "three"
 import CameraControls from "camera-controls"
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
 
 CameraControls.install({ THREE: THREE })
 
@@ -42,9 +43,16 @@ export function initScene(canvasID) {
 
   const w = canvas.getBoundingClientRect().width
   const h = canvas.getBoundingClientRect().height
-  const camera = new THREE.PerspectiveCamera(5, w / h, 0.01, 1000)
+  const camera = new THREE.PerspectiveCamera(25, w / h, 0.01, 1000)
 
   const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true })
+
+  // renderer.toneMapping = THREE.ACESFilmicToneMapping
+  renderer.toneMapping = THREE.CineonToneMapping
+  // renderer.toneMapping = THREE.LinearToneMapping
+  renderer.toneMappingExposure = 1;
+  renderer.outputEncoding = THREE.sRGBEncoding;
+
   renderer.setClearColor(0xffffff, 0)
   renderer.setSize(w, h)
 
@@ -78,7 +86,34 @@ export function addLightsToScene(scene) {
 
   // Sneak in a little axes helper for now
   const axesHelper = new THREE.AxesHelper(5)
-  scene.add(axesHelper)
+  // scene.add(axesHelper)
+
+  const directionalLight1 = new THREE.DirectionalLight(0xcccccc, .6);
+  directionalLight1.translateZ(50)
+  directionalLight1.translateY(30)
+  scene.add(directionalLight1);
+
+  const directionalLight2 = new THREE.DirectionalLight(0xcccccc, .6);
+  directionalLight2.translateZ(-50)
+  directionalLight2.translateY(-30)
+  scene.add(directionalLight2);
+
+  // console.log("Public URL:", process.env.PUBLIC_URL)
+
+  // new RGBELoader().setPath(process.env.PUBLIC_URL + "/").load("pretville_street_4k.hdr", function (texture) {
+  //   console.log("Texture:", texture)
+  //   texture.mapping = THREE.EquirectangularReflectionMapping;
+  //   scene.background = texture;
+  //   scene.environment = texture;
+  // })
+  //   .load('studio_small_09_1k.hdr', function (texture) {
+
+  //       texture.mapping = THREE.EquirectangularReflectionMapping;
+
+  //       scene.background = texture;
+  //       scene.environment = texture;
+
+  //   });
 }
 
 export function addSketchToScene(sketch, scene) {
@@ -171,4 +206,38 @@ export function addPointToScene(scene) {
   })
   const dot = new THREE.Points(dotGeometry, dotMaterial)
   scene.add(dot)
+}
+
+export function addSolidToScene(solid, scene) {
+  for (const face of solid.faces) {
+    const geometry = new THREE.BufferGeometry();
+
+    const nodes = []
+    for (let node of face.nodes) {
+      nodes.push(...node)
+    }
+    const vertices = new Float32Array(nodes)
+    geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+
+    const indices = []
+    for (let tri of face.triangles) {
+      indices.push(tri[0] - 1, tri[1] - 1, tri[2] - 1)
+    }
+
+    geometry.setIndex(indices)
+    geometry.computeVertexNormals()
+
+    // const material = new THREE.MeshStandardMaterial({ color: 0xff0000, side: THREE.DoubleSide });
+
+    const faceMaterial = new THREE.MeshStandardMaterial({
+      color: colorScheme.plane,
+      side: THREE.DoubleSide,
+      depthWrite: true,
+      transparent: false,
+    })
+
+
+    const mesh = new THREE.Mesh(geometry, faceMaterial);
+    scene.add(mesh)
+  }
 }
