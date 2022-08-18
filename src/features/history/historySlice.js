@@ -78,11 +78,20 @@ export const historySlice = createSlice({
                             start: "e",
                             end: "a",
                         },
+                        {
+                            id: "f",
+                            start: "d",
+                            end: "a",
+                        },
                     ],
                     polygons: [
                         {
                             id: "a",
-                            points: ["a", "b", "c", "d", "e"],
+                            points: ["a", "b", "c", "d"],
+                        },
+                        {
+                            id: "b",
+                            points: ["a", "d", "e"],
                         },
                     ],
                 },
@@ -95,8 +104,23 @@ export const historySlice = createSlice({
                         sketch: "sketchA",
                         polygon: "a",
                     },
+                    {
+                        sketch: "sketchA",
+                        polygon: "b",
+                    },
                 ],
                 height: -0.3, // height is assumed to be perp to the sketch plane
+            },
+            {
+                type: "extrude",
+                name: "extrudeB",
+                polygons: [
+                    {
+                        sketch: "sketchA",
+                        polygon: "b",
+                    },
+                ],
+                height: 0.6, // height is assumed to be perp to the sketch plane
             },
         ],
     },
