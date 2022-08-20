@@ -2,7 +2,7 @@
 
 This is a prototype of a new 3D CAD modeling tool that runs 100% in-browser. It is completely free and open source.
 
-[Demo Here!](https://mattferraro.github.io/ocjstest/)
+[Demo Here!](https://mattferraro.github.io/CADmium/)
 
 # Tools
 
